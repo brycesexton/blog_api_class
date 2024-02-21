@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const blogCtrl = require('../../controllers/api/blogController')
+const userCtrl = require('../../controllers/api/userController')
 
-router.get('/', todoCtrl.indexNotComplete, todoCtrl.jsonTodos)
-router.get('/completed', todoCtrl.indexComplete, todoCtrl.jsonTodos)
-router.delete('/:id', todoCtrl.destroy, todoCtrl.jsonTodo)
-router.put('/:id', todoCtrl.update, todoCtrl.jsonTodo)
-router.post('/', todoCtrl.create, todoCtrl.jsonTodo)
-router.get('/:id', todoCtrl.show, todoCtrl.jsonTodo)
+router.get('/', blogCtrl.index)
+router.post('/:id', blogCtrl.create, userCtrl.auth)
+router.put('/:id', blogCtrl.update)
+router.get('/:id', blogCtrl.show)
+router.delete('/:id',blogCtrl.destroy, userCtrl.auth )
 
 module.exports = router
