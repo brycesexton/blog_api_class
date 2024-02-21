@@ -1,4 +1,5 @@
 const Blog = require('../../models/blogModel')
+const User = require('../../models/userModel')
 
 module.exports = {
     create,
@@ -11,7 +12,10 @@ module.exports = {
 async function create(req, res, next){
     try {
         const blog = await Blog.create(req.body)
+        const user = await User.findOne({email: res.locals.data.email})
         res.locals.data.blog = blog
+        blog.author = user._id
+        user.blogs.addToSet(blog)
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })

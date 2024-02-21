@@ -4,7 +4,7 @@ const bcrypt = require ('bcrypt')
 const jwt = require ('jsonwebtoken')
 
 const userSchema = new Schema ({
-    name: { required: true, type: String },
+    username: { required: true, type: String },
     email: { required: true, type: String },
     password: { required: true, type: String },
     posts: [{ type: Schema.Types.ObjectId, ref: 'Blog' }],
@@ -27,5 +27,4 @@ userSchema.methods.generateAuthToken = async function() {
 }
 
 const User = model('User', userSchema)
-
 module.exports = User
