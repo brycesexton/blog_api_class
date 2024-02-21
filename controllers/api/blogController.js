@@ -1,6 +1,5 @@
 const Blog = require('../../models/blogModel')
 
-
 module.exports = {
     create,
     index,
@@ -27,7 +26,6 @@ async function index(req, res) {
         res.status(400).json({ msg: error.message })
       }
 }
-
 
 async function show(req ,res,next) {
     try {
