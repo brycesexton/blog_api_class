@@ -1,93 +1,58 @@
-const Todo = require('../../models/todo')
+const Blog = require('../../models/blogModel')
 
 
 module.exports = {
     create,
-    indexComplete,
-    indexNotComplete,
+    index,
     show,
     update,
-    destroy,
-    jsonTodos,
-    jsonTodo
+    destroy
 }
 
-// jsonTodos jsonTodo
-// viewControllers
-
-function jsonTodo (_, res) {
-    res.json(res.locals.data.todo)
-}
-
-function jsonTodos (_, res) {
-    res.json(res.locals.data.todos)
-}
-
-/****** C - Create *******/
 async function create(req, res, next){
     try {
-        const todo = await Todo.create(req.body)
-        console.log(todo)
-        res.locals.data.todo = todo
+        const blog = await Blog.create(req.body)
+        res.locals.data.blog = blog
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
 }
 
-/****** R - Read *****/
-
-async function indexComplete(_, res ,next) {
+async function index(req, res) {
     try {
-        const todos = await Todo.find({ completed: true })
-        res.locals.data.todos = todos
-        next()
-    } catch (error) {
+        const foundBlogs = await Blog.find(req.body)
+        res.status(200).json(foundBlogs)
+      } catch (error) {
         res.status(400).json({ msg: error.message })
-    }
-}
-
-async function indexNotComplete(_ ,res,next) {
-    try {
-        const todos = await Todo.find({ completed: false })
-        res.locals.data.todos = todos
-        next()
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
+      }
 }
 
 
 async function show(req ,res,next) {
     try {
-        const todo = await Todo.findById(req.params.id)
-        res.locals.data.todo = todo
+        const blog = await Blog.findById(req.params.id)
+        res.locals.data.blog = blog
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
 }
 
-
-/****** U - Update *****/
-
-
-async function update(req ,res,next) {
+async function update(req ,res, next) {
     try {
-        const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.locals.data.todo = todo
+        const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.locals.data.blog = blog
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
 }
 
-/***** D - destroy/delete *****/
-
-async function destroy(req ,res,next) {
+async function destroy(req ,res, next) {
     try {
-        const todo = await Todo.findByIdAndDelete(req.params.id)
-        res.locals.data.todo = todo
+        const blog = await Blog.findByIdAndDelete(req.params.id)
+        res.locals.data.blog = blog
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })
