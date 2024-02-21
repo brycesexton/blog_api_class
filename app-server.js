@@ -4,17 +4,18 @@ const path = require('path')
 const favicon = require('serve-favicon')
 const logger = require('morgan')
 
-app.use(express.json())
+
+app.use(express.json()) // req.body
 app.use((req, res, next) => {
     res.locals.data = {}
     next()
 })
-
 app.use(logger('dev'))
 app.use(favicon(path.join(__dirname, 'public', 'img','logo.png')))
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('/api/blogs', require('./routes/api/blogRouter'))
-app.use('/api/users', require('./routes/api/userRouter'))
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/blogs', require('./routes/api/blogs'))
+app.use('/api/comments', require('./routes/api/comments'))
 // http://localhost:8000/api/blogs
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'public', 'index.html'))

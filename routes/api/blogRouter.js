@@ -1,12 +1,16 @@
 const express = require('express')
 const router = express.Router()
-const blogCtrl = require('../../controllers/api/blogController')
-const userCtrl = require('../../controllers/api/userController')
+const blogCtrl = require('../../controllers/api/blogs')
+const checkToken = require('../../config/checkToken')
+const ensureLoggedIn = require('../../config/ensureLoggedIn')
 
-router.get('/', blogCtrl.index)
-router.post('/:id', blogCtrl.create, userCtrl.auth)
-router.put('/:id', blogCtrl.update)
-router.get('/:id', blogCtrl.show)
-router.delete('/:id',blogCtrl.destroy, userCtrl.auth)
+// Delete blog
+router.delete('/:id', checkToken, ensureLoggedIn, blogCtrl.destroyBlog, blogCtrl.respondWithBlog)
+
+// Update blog
+router.put('/:id', checkToken, ensureLoggedIn, blogCtrl.updateBlog, blogCtrl.respondWithBlog)
+
+// Create blog
+router.post('/', checkToken, ensureLoggedIn, blogCtrl.createBlog, blogCtrl.respondWithBlog)
 
 module.exports = router

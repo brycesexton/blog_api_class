@@ -1,62 +1,51 @@
-const Blog = require('../../models/blogModel')
-const User = require('../../models/userModel')
+require('dotenv').config()
+const User = require('../../models/user')
+const Blog = require('../../models/blog')
+
+// destroy blog
+const destroyBlog = async (req, res, next) => {
+    try {
+        const deletedBookmark = await Bookmark.findByIdAndDelete(req.params.id)
+        res.locals.data.blog = deletedBookmark
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+// create blog
+const createBlog = async (req, res, next) => {
+    try {
+        const createdBlog = await Blog.create(req.body)
+        const user = await User.findOne({ email: res.locals.data.email })
+        user.blogs.addToSet(createdBlog)
+        createdBlog.author = user._id
+        await user.save()
+        res.locals.data.blog = createdBlog
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+// update blog
+const updateBlog = async (req, res, next) => {
+    try {
+        const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.locals.data.blog = updatedBlog
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+const respondWithBlog = (req, res) => {
+    res.json(res.locals.data.blog)
+}
 
 module.exports = {
-    create,
-    index,
-    show,
-    update,
-    destroy
-}
-
-async function create(req, res, next){
-    try {
-        const blog = await Blog.create(req.body)
-        const user = await User.findOne({email: res.locals.data.email})
-        res.locals.data.blog = blog
-        blog.author = user._id
-        user.blogs.addToSet(blog)
-        next()
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
-}
-
-async function index(req, res) {
-    try {
-        const foundBlogs = await Blog.find(req.body)
-        res.status(200).json(foundBlogs)
-      } catch (error) {
-        res.status(400).json({ msg: error.message })
-      }
-}
-
-async function show(req ,res,next) {
-    try {
-        const blog = await Blog.findById(req.params.id)
-        res.locals.data.blog = blog
-        next()
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
-}
-
-async function update(req ,res, next) {
-    try {
-        const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.locals.data.blog = blog
-        next()
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
-}
-
-async function destroy(req ,res, next) {
-    try {
-        const blog = await Blog.findByIdAndDelete(req.params.id)
-        res.locals.data.blog = blog
-        next()
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
+    destroyBlog,
+    updateBlog,
+    createBlog,
+    respondWithBlog
 }

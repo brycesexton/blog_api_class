@@ -1,88 +1,74 @@
-const User = require('../../models/userModel')
-const bcrypt = require ('bcrypt')
-const jwt = require ('jsonwebtoken')
+require('dotenv').config()
+const jwt = require('jsonwebtoken')
+const User = require('../../models/user')
+const Blog = require('../../models/blog')
+const bcrypt = require('bcrypt')
+const crypto = require('crypto')
 
-
-exports.auth = async (req, res, next) => {
-    try{
-        const token = require.header('Authorization').replace('Bearer ', '')
-        const data = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET)
-        const user = await User.findOne({_id:data._id})
-        if(!user){throw new Error()} req.user = user
+// signUp
+const signUp = async (req, res, next) => {
+    try {
+        const user = await User.create(req.body)
+        const blog = await Blog.findOne({ id: res.locals.data.id })
+        const token = createJWT(user)
+        res.locals.data.user = user
+        res.locals.data.token = token
         next()
-    }
-    catch (error) {
-        res.status(401).send('not authorized')
-    }
-}
-
-exports.indexUsers = async (req, res) => {
-    try {
-        const users = await User.find()
-        res.status(200).json(users)
-    }
-    catch (error) {
-        res.status(401).send({message: error.message})
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
     }
 }
 
-exports.createUser = async (req, res) => {
+// login
+const login = async (req, res, next) => {
     try {
-        const user = new User(req.body)
-        await user.save()
-        const token = await User.generateAuthToken()
-        res.json({user, token})
-    }
-    catch (error){
-        res.status(401).send({message: error.message})
+        const user = await User.findOne({ email: req.body.email })
+        if(!user) throw new Error('user not found, email was invalid')
+        const password = crypto.createHmac('sha256', process.env.SECRET).update(req.body.password).digest('hex').split('').reverse().join('')
+        const match = await bcrypt.compare(password, user.password)
+        if(!match) throw new Error('Password did not match')
+        res.locals.data.user = user
+        res.locals.data.token = createJWT(user)
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
     }
 }
 
-exports.loginUser = async (req, res) => {
+// getBlogsByUser
+const getBlogsByUser = async (req, res, next) => {
     try {
-        const user = await User.findOne({email: req.body.email})
-        if(!user || !await bcrypt.compare(req.body.password, user.password)) {
-            res.status(400).send('invalid login credentials')
-        }
-        else {
-            const token = await User.generateAuthToken()
-            res.json({user, token})
-        }
-    }
-    catch(error) {
-        res.status(401).send({message: error.message})
+        const user = await User.findOne({ email: res.locals.data.email }).populate('blogs').sort('blogs.createdAt').exec()
+        const blogs = user.blogs
+        res.locals.data.blogs = blogs
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
     }
 }
 
-exports.indexUserById = async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id)
-        res.status(200).json(userItem)
-    }
-    catch(error) {
-        res.status(401).send({message: error.message})
-    }
+const respondWithToken = (req, res) => {
+    res.json(res.locals.data.token)
 }
 
-exports.updateUser = async (req, res) => {
-    try {
-        const updates = Object.keys(req.body)
-        const user = await User.findOne({_id:req.params.id})
-        updates.forEach(update = user[update] = req.body[update])
-        await user.save()
-        res.json({user})
-    }
-    catch(error) {
-        res.status(401).send({message: error.message})
-    }
+const respondWithUser = (req, res) => {
+    res.json(res.locals.data.user)
 }
 
-exports.deleteUser = async (req, res) => {
-    try {
-        await req.user.deleteOne()
-        res.json ({message: 'user deleted'})
-    }
-    catch(error) {
-        res.status(401).send({message: error.message})
-    }
+const respondWithBlogs = (req, res) => {
+    res.json(res.locals.data.blogs)
+}
+
+module.exports = {
+    signUp,
+    login,
+    getBlogsByUser,
+    respondWithToken,
+    respondWithUser,
+    respondWithBlogs
+}
+
+// Helper function
+function createJWT(user){
+    return jwt.sign({ user }, process.env.SECRET, {expiresIn: '48h' })
 }
