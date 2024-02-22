@@ -58,7 +58,8 @@ function App() {
     path: "/register",
     element: /*#__PURE__*/React.createElement(_pages_AuthPage_AuthPage__WEBPACK_IMPORTED_MODULE_1__["default"], {
       setUser: setUser,
-      setToken: setToken
+      setToken: setToken,
+      signUp: signUp
     })
   }), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
     path: "/blog",
@@ -465,4 +466,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.77935c69460b10bdc9a83a1b9ec65379.js.map
+//# sourceMappingURL=App.681540fd372c356f0e5c361e87261904.js.map

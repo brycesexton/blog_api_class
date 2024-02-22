@@ -30,7 +30,7 @@ export default function App() {
         <div className={styles.App}>
             <Routes>
                 <Route path = "/" element = {<HomePage user= {user} token= {token} setToken= {setToken}/>}></Route>
-                <Route path = "/register" element = {<AuthPage setUser= {setUser} setToken= {setToken}/>}></Route>
+                <Route path = "/register" element = {<AuthPage setUser= {setUser} setToken= {setToken} signUp= {signUp}/>}></Route>
                 <Route path = "/blog" element = {<ShowPage user= {user} token= {token} setToken= {setToken}/>}></Route>
             </Routes>
         </div>
