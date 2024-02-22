@@ -11,9 +11,9 @@ export default function App() {
     return (
         <div className={styles.App}>
             <Routes>
-                <Route path = "/" element = {<HomePage/>}></Route>
+                <Route path = "/" element = {<HomePage user ={user} token ={token} setToken ={setToken}/>}></Route>
                 <Route path = "/register" element = {<AuthPage/>}></Route>
-                <Route path = "/blog" element = {<ShowPage/>}></Route>
+                <Route path = "/blog" element = {<ShowPage user ={user} token ={token} setToken ={setToken}/>}></Route>
             </Routes>
         </div>
     )
