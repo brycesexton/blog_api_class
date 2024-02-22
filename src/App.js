@@ -6,6 +6,8 @@ import { Route, Routes } from 'react-router-dom'
 import styles from './App.module.scss'
 
 export default function App() {
+    const [user, setUser] = useState(null)
+    const [token, setToken] = useState('')
     return (
         <div className={styles.App}>
             <Routes>
