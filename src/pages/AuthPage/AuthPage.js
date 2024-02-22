@@ -1,5 +1,6 @@
 export default function AuthPage (){
-    return
+    return (
 
     <h1>AUTH PAGE</h1>
+    )
 }

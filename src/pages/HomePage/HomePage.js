@@ -1,5 +1,6 @@
 export default function HomePage (){
-    return
+    return (
     
     <h1>HOME PAGE</h1>
+    )
 }

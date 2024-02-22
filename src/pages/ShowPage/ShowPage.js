@@ -1,5 +1,6 @@
 export default function ShowPage (){
-    return
+    return(
     
     <h1>SHOW PAGE</h1>
+    )
 }

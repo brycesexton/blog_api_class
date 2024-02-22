@@ -1,7 +1,7 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
-const User = require('../../models/user')
-const Blog = require('../../models/blog')
+const User = require('../../models/userModel')
+const Blog = require('../../models/blogModel')
 const bcrypt = require('bcrypt')
 const crypto = require('crypto')
 

@@ -1,6 +1,6 @@
 require('dotenv').config()
-const Blog = require('../../models/blog')
-const Comment = require('../../models/comment')
+const Blog = require('../../models/blogModel')
+const Comment = require('../../models/commentModel')
 
 // destroy comment
 const destroyComment = async (req, res, next) => {

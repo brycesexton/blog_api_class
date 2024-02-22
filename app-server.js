@@ -13,9 +13,9 @@ app.use((req, res, next) => {
 app.use(logger('dev'))
 app.use(favicon(path.join(__dirname, 'public', 'img','logo.png')))
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('/api/users', require('./routes/api/users'))
-app.use('/api/blogs', require('./routes/api/blogs'))
-app.use('/api/comments', require('./routes/api/comments'))
+app.use('/api/userRouter', require('./routes/api/userRouter'))
+app.use('/api/blogRouter', require('./routes/api/blogRouter'))
+app.use('/api/commentRouter', require('./routes/api/commentRouter'))
 // http://localhost:8000/api/blogs
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'public', 'index.html'))
