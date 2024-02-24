@@ -188,6 +188,20 @@ function App() {
 
 /***/ }),
 
+/***/ "./src/components/LoginForm/LoginForm.js":
+/*!***********************************************!*\
+  !*** ./src/components/LoginForm/LoginForm.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* unused harmony export default */
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function LoginForm(props) {
+  return /*#__PURE__*/React.createElement("h2", null, "LoginForm");
+}
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -225,9 +239,15 @@ root.render( /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AuthPage)
 /* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_LoginForm_LoginForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/LoginForm/LoginForm */ "./src/components/LoginForm/LoginForm.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-function AuthPage() {
-  return /*#__PURE__*/React.createElement("h1", null, "AUTH PAGE");
+
+
+
+function AuthPage(props) {
+  return /*#__PURE__*/React.createElement("h1", null, "This is the AuthPage ");
 }
 
 /***/ }),
@@ -581,4 +601,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.7e341695ea066b9a059c7cb94abfd97e.js.map
+//# sourceMappingURL=App.0dd981baf42e79c0aadce603e5de332e.js.map
