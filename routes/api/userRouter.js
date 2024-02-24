@@ -1,15 +1,10 @@
-const router = require('express').Router()
-const userCtrl = require('../../controllers/api/userController')
-// const checkToken = require('../../config/checkToken')
-// const ensureLoggedIn = require('../../config/ensureLoggedIn')
+const express = require('express')
+const router = express.Router()
+const userController = require('../../controllers/api/userController')
 
-// SignUp
-router.post('/', userCtrl.signUp, userCtrl.respondWithToken)
-
-// Login
-router.post('/login', userCtrl.login, userCtrl.respondWithToken)
-
-// Get Blogs by User
-// router.get('/blogs', checkToken, ensureLoggedIn, userCtrl.getBlogsByUser, userCtrl.respondWithBlogs)
+router.post('/', userController.createUser)
+router.post('/login', userController.loginUser) // /api/users/login
+router.put('/:id', userController.updateUser)
+router.delete('/:id', userController.auth, userController.deleteUser)
 
 module.exports = router

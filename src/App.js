@@ -139,8 +139,7 @@ export default function App(){
             console.error(error)
         }
     }
-
-
+    
     return(
         <div className={styles.App}>
             {/*Get all Blog Posts when the component Mounts

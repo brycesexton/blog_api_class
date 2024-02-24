@@ -1,74 +1,68 @@
 require('dotenv').config()
-const jwt = require('jsonwebtoken')
 const User = require('../../models/userModel')
-const Blog = require('../../models/blogModel')
 const bcrypt = require('bcrypt')
-const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
 
-// signUp
-const signUp = async (req, res, next) => {
-    try {
-        const user = await User.create(req.body)
-        const blog = await Blog.findOne({ id: res.locals.data.id })
-        const token = createJWT(user)
-        res.locals.data.user = user
-        res.locals.data.token = token
-        next()
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
+exports.auth = async (req, res, next) => {
+  try {
+    const token = req.header('Authorization').replace('Bearer ', '')
+    const payloadFromJWT = jwt.verify(token, process.env.JWT_SECRET)
+    const user = await User.findOne({ _id: payloadFromJWT._id })
+    if (!user) {
+      throw new Error()
     }
+    req.user = user
+    next()
+  } catch (error) {
+    res.status(401).send('Not authorized')
+  }
 }
 
-// login
-const login = async (req, res, next) => {
-    try {
-        const user = await User.findOne({ email: req.body.email })
-        if(!user) throw new Error('user not found, email was invalid')
-        const password = crypto.createHmac('sha256', process.env.JWT_SECRET).update(req.body.password).digest('hex').split('').reverse().join('')
-        const match = await bcrypt.compare(password, user.password)
-        if(!match) throw new Error('Password did not match')
-        res.locals.data.user = user
-        res.locals.data.token = createJWT(user)
-        next()
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
+exports.createUser = async (req, res) => {
+  try{
+    const user = new User(req.body)
+    await user.save()
+    const token = await user.generateAuthToken()
+    res.json({ user, token })
+  } catch(error){
+    res.status(400).json({message: error.message})
+  }
+}
+
+exports.loginUser = async (req, res) => {
+  try{
+    const user = await User.findOne({ email: req.body.email })
+    if (!user || !await bcrypt.compare(req.body.password, user.password)) {
+      res.status(400).send('Invalid login credentials')
+    } else {
+      // https://i.imgur.com/3quZxs4.png
+      // This is accomplishing step 2
+      const token = await user.generateAuthToken()
+      res.json({ user, token }) // Sending the user and the token to the front-end
     }
+  } catch(error){
+    res.status(400).json({message: error.message})
+  }
 }
 
-// getBlogsByUser
-const getBlogsByUser = async (req, res, next) => {
-    try {
-        const user = await User.findOne({ email: res.locals.data.email }).populate('blogs').sort('blogs.createdAt').exec()
-        const blogs = user.blogs
-        res.locals.data.blogs = blogs
-        next()
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
+exports.updateUser = async (req, res) => {
+  try{
+    const updates = Object.keys(req.body)
+    const user = await User.findOne({ _id: req.params.id })
+    updates.forEach(update => user[update] = req.body[update])
+    await user.save()
+    res.json(user)
+  }catch(error){
+    res.status(400).json({message: error.message})
+  }
+  
 }
 
-const respondWithToken = (req, res) => {
-    res.json(res.locals.data.token)
-}
-
-const respondWithUser = (req, res) => {
-    res.json(res.locals.data.user)
-}
-
-const respondWithBlogs = (req, res) => {
-    res.json(res.locals.data.blogs)
-}
-
-module.exports = {
-    signUp,
-    login,
-    getBlogsByUser,
-    respondWithToken,
-    respondWithUser,
-    respondWithBlogs
-}
-
-// Helper function
-function createJWT(user){
-    return jwt.sign({ user }, process.env.JWT_SECRET, {expiresIn: '48h' })
+exports.deleteUser = async (req, res) => {
+  try{
+    await req.user.deleteOne()
+    res.json({ message: 'User deleted' })
+  }catch(error){
+    res.status(400).json({message: error.message})
+  }
 }
