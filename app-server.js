@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 app.use(logger('dev'))
 app.use(favicon(path.join(__dirname, 'public', 'img','logo.png')))
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('/api/userRouter', require('./routes/api/userRouter'))
+app.use('/api/userRouter', require('./routes/api/userRouter')) //remember what you name the routes
 app.use('/api/blogRouter', require('./routes/api/blogRouter'))
 app.use('/api/commentRouter', require('./routes/api/commentRouter'))
 // http://localhost:8000/api/blogs
