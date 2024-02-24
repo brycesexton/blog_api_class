@@ -99,6 +99,43 @@ export default function App() {
         }
     }
 
+    const updateBlog = async (newBlogData, id, token) => {
+        if(!token){
+            return
+        }
+        try {
+            const response = await fetch(`/api/blogRouter/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(newBlogData)
+            })
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    const deleteBlog = async (id, token) => {
+        if(!token){
+            return
+        }
+        try {
+            const response = await fetch(`/api/blogRouter/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <div className={styles.App}>
             <Routes>
