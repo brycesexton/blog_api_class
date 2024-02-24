@@ -4,5 +4,12 @@ import SignUpForm from "../../components/SignUpForm/SignUpForm"
 
 
 export default function AuthPage (props){
-        return<h1>This is the AuthPage {/* Hello */}</h1>
+   const [showLogin, setShowLogin] = useState(true)
+
+   return(
+    <>
+      <button onClick={() => setShowLogin(!showLogin)}>{!showLogin? 'Already Have An account? Click Here To Sign In.': 'New Here? Click Here Sign Up.'}</button>
+      { !showLogin  ?  <SignUpForm signUp = {props.signUp} />  :  <LoginForm login = {props.login} />} 
+    </>
+   )
 }
