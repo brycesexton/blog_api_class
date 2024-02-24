@@ -22,7 +22,7 @@ export default function App(){
            setUser(data.user)
            setToken(data.token)
            localStorage.setItem('token', data.token)
-           localStorage.setItem('user', data.user)
+           localStorage.setItem('user', JSON.stringify(data.user))
         } catch (error) {
            console.error(error) 
         }
@@ -46,13 +46,13 @@ export default function App(){
         localStorage.setItem('token', tokenData)
         setToken(tokenData)
         const userData = data.user
-        localStorage.setItem('user', userData)
+        localStorage.setItem('user', JSON.stringify(userData))
         setUser(userData)
-        } 
-        catch (error) {
-            console.error(error)        
-        }   
-    }       
+        } catch (error) {
+            console.error(error)
+        }    
+    }
+
     const createBlog = async (blogData, token) => {
         // https://i.imgur.com/3quZxs4.png
         // Step 4
@@ -140,10 +140,12 @@ export default function App(){
         }
     }
 
+
     return(
         <div className={styles.App}>
-            {/*Get all Blog Posts when the component Mounts
-            Create an individual Blogs
+            {/*
+               Get all Blog Posts when the component Mounts
+               Create an individual Blogs
             */}
             <Routes>
                 <Route path="/" 
@@ -152,6 +154,7 @@ export default function App(){
                     user={user} 
                     token={token} 
                     setToken={setToken}
+                    setUser={setUser}
                     getAllBlogs={getAllBlogs}
                     createBlog={createBlog}
                 />}></Route>
@@ -174,6 +177,7 @@ export default function App(){
                     updateBlog={updateBlog}
                 />}></Route>
             </Routes>
+
         </div>
     )
 }
