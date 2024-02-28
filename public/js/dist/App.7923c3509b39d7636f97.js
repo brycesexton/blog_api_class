@@ -277,7 +277,7 @@ function CreateForm(props) {
   };
   return /*#__PURE__*/React.createElement("form", {
     onSubmit: handleSubmit
-  }, /*#__PURE__*/React.createElement("h2", null, "CREATE A NEW POST ", props.user.name, " "), /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("h4", null, "Create a new post below..."), /*#__PURE__*/React.createElement("input", {
     placeholder: "Title",
     type: "text",
     name: "title",
@@ -329,7 +329,7 @@ function LoginForm(props) {
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", {
     class: _LoginForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].heading
-  }, "Log into your account..."), /*#__PURE__*/React.createElement("form", {
+  }, "Login"), /*#__PURE__*/React.createElement("form", {
     class: _LoginForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].form,
     onSubmit: e => {
       e.preventDefault();
@@ -393,7 +393,7 @@ function SignUpForm(props) {
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", {
     class: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].heading
-  }, "SIGN UP!"), /*#__PURE__*/React.createElement("form", {
+  }, "Sign up!"), /*#__PURE__*/React.createElement("form", {
     class: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].form,
     onSubmit: e => {
       e.preventDefault();
@@ -465,21 +465,21 @@ function UpdateForm(props) {
   };
   return /*#__PURE__*/React.createElement("form", {
     onSubmit: handleSubmit
-  }, /*#__PURE__*/React.createElement("h2", null, "Update Blog"), /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("h2", null, "Update"), /*#__PURE__*/React.createElement("input", {
     placeholder: "Title",
     type: "text",
     name: "title",
     value: props.blog.title,
     onChange: handleChange
   }), /*#__PURE__*/React.createElement("input", {
-    placeholder: "BODY",
+    placeholder: "Body",
     type: "text",
     name: "body",
     value: props.blog.body,
     onChange: handleChange
   }), /*#__PURE__*/React.createElement("input", {
     type: "submit",
-    value: "Submit Update Data"
+    value: "Update"
   }));
 }
 
@@ -585,7 +585,7 @@ function HomePage(props) {
       props.setUser(JSON.parse(localStorage.getItem('user')));
     }
   }, []);
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Welcome to the Liberty Blog"), showCreate ? /*#__PURE__*/React.createElement(_components_CreateForm_CreateForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "THE LIBERTY BLOG"), showCreate ? /*#__PURE__*/React.createElement(_components_CreateForm_CreateForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     user: props.user,
     createBlog: props.createBlog,
     token: props.token
@@ -668,7 +668,7 @@ function ShowPage(props) {
     to: '/'
   }, "Go to Homepage"), /*#__PURE__*/React.createElement("h1", null, (blog === null || blog === void 0 ? void 0 : blog.title) || 'Loading....'), /*#__PURE__*/React.createElement("p", null, (blog === null || blog === void 0 ? void 0 : blog.body) || ''), allowChanges ? /*#__PURE__*/React.createElement("button", {
     onClick: () => setShowUpdate(!showUpdate)
-  }, "Update your blog...") : /*#__PURE__*/React.createElement(React.Fragment, null), allowChanges && showUpdate ? /*#__PURE__*/React.createElement(_components_UpdateForm_UpdateForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Update") : /*#__PURE__*/React.createElement(React.Fragment, null), allowChanges && showUpdate ? /*#__PURE__*/React.createElement(_components_UpdateForm_UpdateForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     id: id,
     updateBlog: props.updateBlog,
     setShowUpdate: setShowUpdate,
@@ -678,7 +678,7 @@ function ShowPage(props) {
     setToken: props.token
   }) : /*#__PURE__*/React.createElement(React.Fragment, null), allowChanges ? /*#__PURE__*/React.createElement("button", {
     onClick: handleDelete
-  }, "Delete Blog") : /*#__PURE__*/React.createElement(React.Fragment, null));
+  }, "Delete") : /*#__PURE__*/React.createElement(React.Fragment, null));
 }
 
 /***/ }),
@@ -701,34 +701,75 @@ function ShowPage(props) {
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `body {
-  margin: 0;
-  min-height: 100vh;
+___CSS_LOADER_EXPORT___.push([module.id, `.IMqMrT2eGOGeFiLbCAGg {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: white;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.KTmxx2sH00E53HXHCND1 {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.KTmxx2sH00E53HXHCND1 img {
-  width: 50%;
-  max-height: 300px;
-}
-.KTmxx2sH00E53HXHCND1 h1 {
-  width: 100%;
+header, footer {
+  background-color: #007bff;
+  color: #fff;
+  padding: 1rem;
   text-align: center;
-  color: rgba(23, 5, 58, 0.8);
-}`, "",{"version":3,"sources":["webpack://./src/App.module.scss"],"names":[],"mappings":"AAAA;EACI,SAAA;EACA,iBAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,uBAAA;AACJ;;AAEA;EACI,WAAA;EACA,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,sBAAA;AACJ;AAAI;EACI,UAAA;EACA,iBAAA;AAER;AAAI;EACI,WAAA;EACA,kBAAA;EACA,2BAAA;AAER","sourcesContent":["body {\n    margin: 0;\n    min-height: 100vh;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    background-color: white;\n}\n\n.banner{\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    img {\n        width: 50%;\n        max-height: 300px;\n    }\n    h1 {\n        width: 100%;\n        text-align: center;\n        color: rgba(23,5, 58, 0.8);\n    }\n}\n"],"sourceRoot":""}]);
+}
+
+main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #0056b3;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.TmyVJMhvqPEP9eklpupg {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+.WFNC7pZfFoqn2FBVv_xO {
+  color: #ff0000;
+  font-size: 14px;
+}`, "",{"version":3,"sources":["webpack://./src/App.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,sBAAA;EACA,iBAAA;EACA,yBAAA;EACA,WAAA;EACA,2DAAA;AACJ;;AAEA;EACI,yBAAA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;AACJ;;AAEA;EACI,YAAA;EACA,aAAA;AACJ;;AAEA;EACI,cAAA;EACA,qBAAA;AACJ;AACI;EACI,0BAAA;AACR;;AAGA;EACI,yBAAA;EACA,YAAA;EACA,WAAA;EACA,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,eAAA;AAAJ;AAEI;EACI,yBAAA;AAAR;;AAIA;EACI,WAAA;EACA,aAAA;EACA,mBAAA;EACA,kBAAA;EACA,sBAAA;AADJ;;AAIA;EACI,aAAA;EACA,sBAAA;EACA,mBAAA;AADJ;;AAIA;EACI,kBAAA;AADJ;;AAIA;EACI,cAAA;EACA,eAAA;AADJ","sourcesContent":[".App {\n    display: flex;\n    flex-direction: column;\n    min-height: 100vh;\n    background-color: #f5f5f5;\n    color: #333;\n    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\nheader, footer {\n    background-color: #007bff;\n    color: #fff;\n    padding: 1rem;\n    text-align: center;\n}\n\nmain {\n    flex-grow: 1;\n    padding: 20px;\n}\n\na {\n    color: #007bff;\n    text-decoration: none;\n\n    &:hover {\n        text-decoration: underline;\n    }\n}\n\nbutton {\n    background-color: #007bff;\n    border: none;\n    color: #fff;\n    padding: 10px 15px;\n    border-radius: 5px;\n    cursor: pointer;\n    font-size: 16px;\n\n    &:hover {\n        background-color: #0056b3;\n    }\n}\n\ninput, select, textarea {\n    width: 100%;\n    padding: 10px;\n    margin-bottom: 15px;\n    border-radius: 5px;\n    border: 1px solid #ccc;\n}\n\n.form-group {\n    display: flex;\n    flex-direction: column;\n    margin-bottom: 15px;\n}\n\nlabel {\n    margin-bottom: 5px;\n}\n\n.error {\n    color: #ff0000;\n    font-size: 14px;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"banner": `KTmxx2sH00E53HXHCND1`
+	"App": `IMqMrT2eGOGeFiLbCAGg`,
+	"form-group": `TmyVJMhvqPEP9eklpupg`,
+	"error": `WFNC7pZfFoqn2FBVv_xO`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1186,4 +1227,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.bad4cbddf9f980bb28f2f430b7c33483.js.map
+//# sourceMappingURL=App.69410477bc99e1f363e98ce4cdc7493c.js.map

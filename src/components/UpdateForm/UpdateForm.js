@@ -16,10 +16,10 @@ export default function UpdateForm(props) {
 
     return(
         <form onSubmit={handleSubmit}>
-            <h2>Update Blog</h2>
+            <h2>Update</h2>
             <input placeholder='Title' type="text" name="title" value={props.blog.title} onChange={handleChange}/>
-            <input placeholder='BODY' type="text" name="body" value={props.blog.body} onChange={handleChange}/>
-            <input type="submit" value="Submit Update Data"/>
+            <input placeholder='Body' type="text" name="body" value={props.blog.body} onChange={handleChange}/>
+            <input type="submit" value="Update"/>
         </form>
     )
 

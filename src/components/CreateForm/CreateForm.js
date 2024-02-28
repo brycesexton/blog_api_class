@@ -25,7 +25,7 @@ export default function CreateForm(props) {
 
     return(
         <form onSubmit={handleSubmit}>
-            <h2>CREATE A NEW POST {props.user.name} </h2>
+            <h4>Create a new post below...</h4>
             <input placeholder='Title' type="text" name="title" value={formData.title} onChange={handleChange}/>
             <input placeholder='Body' type="text" name="body" value={formData.body} onChange={handleChange}/>
             <input type="submit" value="Create Blog"/>

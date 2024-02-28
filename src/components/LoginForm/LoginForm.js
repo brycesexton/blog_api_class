@@ -12,7 +12,7 @@ export default function LoginForm (props){
     }
     return(
         <>
-        <h2 class={styles.heading}>Log into your account...</h2>
+        <h2 class={styles.heading}>Login</h2>
         <form class={styles.form} onSubmit={(e) => {
             e.preventDefault()
             props.login(credentials)
