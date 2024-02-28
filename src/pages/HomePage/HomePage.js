@@ -30,8 +30,8 @@ export default function HomePage (props){
 
     return(
         <div>
-            <h1>Welcome to our blog!</h1>
-            { showCreate? <CreateForm user ={props.user} createBlog={props.createBlog} token={props.token}/> : <></> }
+            <h1>Welcome to the Liberty Blog</h1>
+            { showCreate? <CreateForm user={props.user} createBlog={props.createBlog} token={props.token}/> : <></> }
             { blogs.length? <Blogs blogs={blogs}/> : 'Sorry our writers are lazy' }
         </div>
     )
