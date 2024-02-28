@@ -8,7 +8,7 @@ export default function AuthPage (props){
 
    return(
     <>
-      <button onClick={() => setShowLogin(!showLogin)}>{!showLogin? 'Already Have An account? Click Here To Sign In.': 'New Here? Click Here Sign Up.'}</button>
+      <button onClick={() => setShowLogin(!showLogin)}>{!showLogin? 'Click here to sign in.': 'Create a new account.'}</button>
       { !showLogin  ?  <SignUpForm signUp = {props.signUp} />  :  <LoginForm login = {props.login} />} 
     </>
    )

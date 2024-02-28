@@ -6,7 +6,7 @@ export default function Blogs(props) {
             return(
             <article key={blog._id}>
                 <h3>{blog.title}</h3>
-                <Link to={`/blog/${blog._id}`}>This the link to the Show Page of {`${blog._id}`}</Link>
+                <Link to={`/blog/${blog._id}`}>GO TO THE SHOW PAGE {`${blog._id}`}</Link>
             </article>)
         })}
     </div>)

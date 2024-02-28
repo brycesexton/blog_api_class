@@ -203,17 +203,9 @@ function App() {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* unused harmony export default */
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-function Blogs(props) {
-  return /*#__PURE__*/React.createElement("div", null, props.blogs.map(blog => {
-    return /*#__PURE__*/React.createElement("article", {
-      key: blog._id
-    }, /*#__PURE__*/React.createElement("h3", null, blog.title), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__.Link, {
-      to: "/blog/".concat(blog._id)
-    }, "This the link to the Show Page of ", "".concat(blog._id)));
-  }));
+function Blog(props) {
+  return /*#__PURE__*/React.createElement("h1", null, "Blog");
 }
 
 /***/ }),
@@ -236,7 +228,7 @@ function Blogs(props) {
       key: blog._id
     }, /*#__PURE__*/React.createElement("h3", null, blog.title), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__.Link, {
       to: "/blog/".concat(blog._id)
-    }, "This the link to the Show Page of ", "".concat(blog._id)));
+    }, "GO TO THE SHOW PAGE ", "".concat(blog._id)));
   }));
 }
 
@@ -285,14 +277,14 @@ function CreateForm(props) {
   };
   return /*#__PURE__*/React.createElement("form", {
     onSubmit: handleSubmit
-  }, /*#__PURE__*/React.createElement("h2", null, "Create A New BlogPost ", props.user.name, " "), /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("h2", null, "CREATE A NEW POST ", props.user.name, " "), /*#__PURE__*/React.createElement("input", {
     placeholder: "Title",
     type: "text",
     name: "title",
     value: formData.title,
     onChange: handleChange
   }), /*#__PURE__*/React.createElement("input", {
-    placeholder: "BODY",
+    placeholder: "Body",
     type: "text",
     name: "body",
     value: formData.body,
@@ -401,7 +393,7 @@ function SignUpForm(props) {
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", {
     class: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].heading
-  }, "SIGN UP TO CHECK OUT MY BLOG"), /*#__PURE__*/React.createElement("form", {
+  }, "SIGN UP!"), /*#__PURE__*/React.createElement("form", {
     class: _SignUpForm_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].form,
     onSubmit: e => {
       e.preventDefault();
@@ -473,7 +465,7 @@ function UpdateForm(props) {
   };
   return /*#__PURE__*/React.createElement("form", {
     onSubmit: handleSubmit
-  }, /*#__PURE__*/React.createElement("h2", null, "Update Blog Below"), /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("h2", null, "Update Blog"), /*#__PURE__*/React.createElement("input", {
     placeholder: "Title",
     type: "text",
     name: "title",
@@ -542,7 +534,7 @@ function AuthPage(props) {
   const [showLogin, setShowLogin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
     onClick: () => setShowLogin(!showLogin)
-  }, !showLogin ? 'Already Have An account? Click Here To Sign In.' : 'New Here? Click Here Sign Up.'), !showLogin ? /*#__PURE__*/React.createElement(_components_SignUpForm_SignUpForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, !showLogin ? 'Click here to sign in.' : 'Create a new account.'), !showLogin ? /*#__PURE__*/React.createElement(_components_SignUpForm_SignUpForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     signUp: props.signUp
   }) : /*#__PURE__*/React.createElement(_components_LoginForm_LoginForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     login: props.login
@@ -599,7 +591,7 @@ function HomePage(props) {
     token: props.token
   }) : /*#__PURE__*/React.createElement(React.Fragment, null), blogs.length ? /*#__PURE__*/React.createElement(_components_Blogs_Blogs__WEBPACK_IMPORTED_MODULE_2__["default"], {
     blogs: blogs
-  }) : 'Sorry our writers are lazy');
+  }) : 'No blogs to show yet...');
 }
 
 /***/ }),
@@ -676,7 +668,7 @@ function ShowPage(props) {
     to: '/'
   }, "Go to Homepage"), /*#__PURE__*/React.createElement("h1", null, (blog === null || blog === void 0 ? void 0 : blog.title) || 'Loading....'), /*#__PURE__*/React.createElement("p", null, (blog === null || blog === void 0 ? void 0 : blog.body) || ''), allowChanges ? /*#__PURE__*/React.createElement("button", {
     onClick: () => setShowUpdate(!showUpdate)
-  }, "Reveal Update Form") : /*#__PURE__*/React.createElement(React.Fragment, null), allowChanges && showUpdate ? /*#__PURE__*/React.createElement(_components_UpdateForm_UpdateForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Update your blog...") : /*#__PURE__*/React.createElement(React.Fragment, null), allowChanges && showUpdate ? /*#__PURE__*/React.createElement(_components_UpdateForm_UpdateForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     id: id,
     updateBlog: props.updateBlog,
     setShowUpdate: setShowUpdate,
@@ -1194,4 +1186,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.05591059ff12b1f46fc0609c4dbec88d.js.map
+//# sourceMappingURL=App.bad4cbddf9f980bb28f2f430b7c33483.js.map
