@@ -200,7 +200,11 @@ function App() {
 /* harmony export */ });
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function Blogs(props) {
-  return /*#__PURE__*/React.createElement("h1", null, "CREATE FORM");
+  return /*#__PURE__*/React.createElement("div", null, props.blogs.map(blog => {
+    return /*#__PURE__*/React.createElement("article", {
+      key: blog._id
+    }, /*#__PURE__*/React.createElement("h3", null, blog.title));
+  }));
 }
 
 /***/ }),
@@ -1107,4 +1111,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.53d623d5c18234885221313387732d8a.js.map
+//# sourceMappingURL=App.0d95a6fbfe7924b9906fd1fa6eeb5913.js.map

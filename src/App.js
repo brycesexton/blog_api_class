@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import AuthPage from './pages/AuthPage/AuthPage'
 import HomePage from './pages/HomePage/HomePage'
@@ -11,7 +12,7 @@ export default function App(){
 
     const signUp = async (credentials) => {
         try {
-           const response  =  await fetch('/api/userRouter', {
+           const response  =  await fetch('/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +34,7 @@ export default function App(){
         try {
         // https://i.imgur.com/3quZxs4.png
         // Step 1 is complete here once someone fills out the loginForm
-        const response = await fetch('/api/userRouter/login', {
+        const response = await fetch('/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type':'application/json'
@@ -45,6 +46,9 @@ export default function App(){
         const tokenData = data.token 
         localStorage.setItem('token', tokenData)
         setToken(tokenData)
+        // the below code is additional to the core features of authentication
+        // You need to decide what additional things you would like to accomplish when you
+        // set up your stuff
         const userData = data.user
         localStorage.setItem('user', JSON.stringify(userData))
         setUser(userData)
@@ -53,6 +57,8 @@ export default function App(){
         }    
     }
 
+    // Create we need token authentication in order to verify that someone can make a blog
+    // Plus identify who is making the blog
     const createBlog = async (blogData, token) => {
         // https://i.imgur.com/3quZxs4.png
         // Step 4
@@ -60,7 +66,7 @@ export default function App(){
             return
         }
         try {
-            const response = await fetch('/api/blogRouter', {
+            const response = await fetch('/api/blogs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +85,7 @@ export default function App(){
     // Read we don't need token authentication to see the blogPosts
     const getAllBlogs = async () => {
         try {
-            const response = await fetch('/api/blogRouter')
+            const response = await fetch('/api/blogs')
             const data = await response.json()
             return data
         } catch (error) {
@@ -88,7 +94,7 @@ export default function App(){
     } 
     const getIndividualBlog = async (id) => {
         try {
-            const response = await fetch(`/api/blogRouter/${id}`)
+            const response = await fetch(`/api/blogs/${id}`)
             const data = await response.json()
             return data
         } catch (error) {
@@ -103,7 +109,7 @@ export default function App(){
             return
         }
         try {
-            const response = await fetch(`/api/blogRouter/${id}`, {
+            const response = await fetch(`/api/blogs/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -127,7 +133,7 @@ export default function App(){
             return
         }
         try {
-            const response = await fetch(`/api/blogRouter/${id}`, {
+            const response = await fetch(`/api/blogs/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -166,12 +172,13 @@ export default function App(){
                     signUp={signUp}
                     login={login}
                 />}></Route>
-                <Route path="/blog" 
+                <Route path="/blog/:id" 
                 element={
                 <ShowPage 
                     user={user} 
                     token={token} 
                     setToken={setToken}
+                    setUser={setUser}
                     getIndividualBlog={getIndividualBlog}
                     deleteBlog={deleteBlog}
                     updateBlog={updateBlog}
