@@ -8,10 +8,10 @@
 }
 
 header, footer {
-    background-color: #007bff;
+    background-color: #9000ff;
     color: #fff;
     padding: 1rem;
-    text-align: center;
+    text-align: left;
 }
 
 main {
@@ -20,7 +20,7 @@ main {
 }
 
 a {
-    color: #007bff;
+    color: #9000ff;
     text-decoration: none;
 
     &:hover {
@@ -28,32 +28,33 @@ a {
     }
 }
 
-button {
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-
-    &:hover {
-        background-color: #0056b3;
-    }
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 10px;
+button, input, select, textarea {
+    width: 50%; 
+    padding: 8px 10px; 
     margin-bottom: 15px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    display: block; 
+    margin: 0 auto; 
+    font-size: 14px; 
+}
+
+button {
+    background-color: #9000ff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #7a00e0; 
+    }
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
+    align-items: left; 
 }
 
 label {

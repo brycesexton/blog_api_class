@@ -58,11 +58,11 @@ export default function ShowPage (props){
             <h1>{blog?.title || 'Loading....'}</h1>
             <p>{blog?.body || ''}</p>
             { allowChanges?
-            <button onClick={() => setShowUpdate(!showUpdate)}>Update</button>:
+            <button onClick={() => setShowUpdate(!showUpdate)}>Update or Delete</button>:
             <></>
             }
-            {allowChanges && showUpdate ? <UpdateForm id={id} updateBlog={props.updateBlog} setShowUpdate={setShowUpdate} setBlog={setBlog} blog={blog} token={props.token} setToken={props.token}/> : <></>}
-            {allowChanges? <button onClick={handleDelete}>Delete</button>: <></>}
+            {allowChanges && showUpdate ? <UpdateForm id={id} updateBlog={props.updateBlog} deleteBlog={props.deleteBlog} setShowUpdate={setShowUpdate} setBlog={setBlog} blog={blog} token={props.token} setToken={props.token}/> : <></>}
+            
         </div>
     )
 }

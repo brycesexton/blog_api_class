@@ -228,7 +228,7 @@ function Blogs(props) {
       key: blog._id
     }, /*#__PURE__*/React.createElement("h3", null, blog.title), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__.Link, {
       to: "/blog/".concat(blog._id)
-    }, "GO TO THE SHOW PAGE ", "".concat(blog._id)));
+    }, "Read"));
   }));
 }
 
@@ -465,7 +465,7 @@ function UpdateForm(props) {
   };
   return /*#__PURE__*/React.createElement("form", {
     onSubmit: handleSubmit
-  }, /*#__PURE__*/React.createElement("h2", null, "Update"), /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("h2", null, "Input updates below."), /*#__PURE__*/React.createElement("input", {
     placeholder: "Title",
     type: "text",
     name: "title",
@@ -668,17 +668,16 @@ function ShowPage(props) {
     to: '/'
   }, "Go to Homepage"), /*#__PURE__*/React.createElement("h1", null, (blog === null || blog === void 0 ? void 0 : blog.title) || 'Loading....'), /*#__PURE__*/React.createElement("p", null, (blog === null || blog === void 0 ? void 0 : blog.body) || ''), allowChanges ? /*#__PURE__*/React.createElement("button", {
     onClick: () => setShowUpdate(!showUpdate)
-  }, "Update") : /*#__PURE__*/React.createElement(React.Fragment, null), allowChanges && showUpdate ? /*#__PURE__*/React.createElement(_components_UpdateForm_UpdateForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Update or Delete") : /*#__PURE__*/React.createElement(React.Fragment, null), allowChanges && showUpdate ? /*#__PURE__*/React.createElement(_components_UpdateForm_UpdateForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     id: id,
     updateBlog: props.updateBlog,
+    deleteBlog: props.deleteBlog,
     setShowUpdate: setShowUpdate,
     setBlog: setBlog,
     blog: blog,
     token: props.token,
     setToken: props.token
-  }) : /*#__PURE__*/React.createElement(React.Fragment, null), allowChanges ? /*#__PURE__*/React.createElement("button", {
-    onClick: handleDelete
-  }, "Delete") : /*#__PURE__*/React.createElement(React.Fragment, null));
+  }) : /*#__PURE__*/React.createElement(React.Fragment, null));
 }
 
 /***/ }),
@@ -711,10 +710,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.IMqMrT2eGOGeFiLbCAGg {
 }
 
 header, footer {
-  background-color: #007bff;
+  background-color: #9000ff;
   color: #fff;
   padding: 1rem;
-  text-align: center;
+  text-align: left;
 }
 
 main {
@@ -723,38 +722,39 @@ main {
 }
 
 a {
-  color: #007bff;
+  color: #9000ff;
   text-decoration: none;
 }
 a:hover {
   text-decoration: underline;
 }
 
-button {
-  background-color: #007bff;
-  border: none;
-  color: #fff;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-button:hover {
-  background-color: #0056b3;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
+button, input, select, textarea {
+  width: 50%;
+  padding: 8px 10px;
   margin-bottom: 15px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  display: block;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+button {
+  background-color: #9000ff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #7a00e0;
 }
 
 .TmyVJMhvqPEP9eklpupg {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+  align-items: left;
 }
 
 label {
@@ -764,7 +764,7 @@ label {
 .WFNC7pZfFoqn2FBVv_xO {
   color: #ff0000;
   font-size: 14px;
-}`, "",{"version":3,"sources":["webpack://./src/App.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,sBAAA;EACA,iBAAA;EACA,yBAAA;EACA,WAAA;EACA,2DAAA;AACJ;;AAEA;EACI,yBAAA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;AACJ;;AAEA;EACI,YAAA;EACA,aAAA;AACJ;;AAEA;EACI,cAAA;EACA,qBAAA;AACJ;AACI;EACI,0BAAA;AACR;;AAGA;EACI,yBAAA;EACA,YAAA;EACA,WAAA;EACA,kBAAA;EACA,kBAAA;EACA,eAAA;EACA,eAAA;AAAJ;AAEI;EACI,yBAAA;AAAR;;AAIA;EACI,WAAA;EACA,aAAA;EACA,mBAAA;EACA,kBAAA;EACA,sBAAA;AADJ;;AAIA;EACI,aAAA;EACA,sBAAA;EACA,mBAAA;AADJ;;AAIA;EACI,kBAAA;AADJ;;AAIA;EACI,cAAA;EACA,eAAA;AADJ","sourcesContent":[".App {\n    display: flex;\n    flex-direction: column;\n    min-height: 100vh;\n    background-color: #f5f5f5;\n    color: #333;\n    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\nheader, footer {\n    background-color: #007bff;\n    color: #fff;\n    padding: 1rem;\n    text-align: center;\n}\n\nmain {\n    flex-grow: 1;\n    padding: 20px;\n}\n\na {\n    color: #007bff;\n    text-decoration: none;\n\n    &:hover {\n        text-decoration: underline;\n    }\n}\n\nbutton {\n    background-color: #007bff;\n    border: none;\n    color: #fff;\n    padding: 10px 15px;\n    border-radius: 5px;\n    cursor: pointer;\n    font-size: 16px;\n\n    &:hover {\n        background-color: #0056b3;\n    }\n}\n\ninput, select, textarea {\n    width: 100%;\n    padding: 10px;\n    margin-bottom: 15px;\n    border-radius: 5px;\n    border: 1px solid #ccc;\n}\n\n.form-group {\n    display: flex;\n    flex-direction: column;\n    margin-bottom: 15px;\n}\n\nlabel {\n    margin-bottom: 5px;\n}\n\n.error {\n    color: #ff0000;\n    font-size: 14px;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/App.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,sBAAA;EACA,iBAAA;EACA,yBAAA;EACA,WAAA;EACA,2DAAA;AACJ;;AAEA;EACI,yBAAA;EACA,WAAA;EACA,aAAA;EACA,gBAAA;AACJ;;AAEA;EACI,YAAA;EACA,aAAA;AACJ;;AAEA;EACI,cAAA;EACA,qBAAA;AACJ;AACI;EACI,0BAAA;AACR;;AAGA;EACI,UAAA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;EACA,sBAAA;EACA,cAAA;EACA,cAAA;EACA,eAAA;AAAJ;;AAGA;EACI,yBAAA;EACA,YAAA;EACA,WAAA;EACA,eAAA;AAAJ;AAEI;EACI,yBAAA;AAAR;;AAIA;EACI,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,iBAAA;AADJ;;AAIA;EACI,kBAAA;AADJ;;AAIA;EACI,cAAA;EACA,eAAA;AADJ","sourcesContent":[".App {\n    display: flex;\n    flex-direction: column;\n    min-height: 100vh;\n    background-color: #f5f5f5;\n    color: #333;\n    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\nheader, footer {\n    background-color: #9000ff;\n    color: #fff;\n    padding: 1rem;\n    text-align: left;\n}\n\nmain {\n    flex-grow: 1;\n    padding: 20px;\n}\n\na {\n    color: #9000ff;\n    text-decoration: none;\n\n    &:hover {\n        text-decoration: underline;\n    }\n}\n\nbutton, input, select, textarea {\n    width: 50%; \n    padding: 8px 10px; \n    margin-bottom: 15px;\n    border-radius: 5px;\n    border: 1px solid #ccc;\n    display: block; \n    margin: 0 auto; \n    font-size: 14px; \n}\n\nbutton {\n    background-color: #9000ff;\n    border: none;\n    color: #fff;\n    cursor: pointer;\n\n    &:hover {\n        background-color: #7a00e0; \n    }\n}\n\n.form-group {\n    display: flex;\n    flex-direction: column;\n    margin-bottom: 15px;\n    align-items: left; \n}\n\nlabel {\n    margin-bottom: 5px;\n}\n\n.error {\n    color: #ff0000;\n    font-size: 14px;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"App": `IMqMrT2eGOGeFiLbCAGg`,
@@ -796,16 +796,16 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.cp82M2vWPil8NvhvB7tS {
   font-size: 2rem;
-  color: green;
+  color: #9000ff;
 }
 
 .O2NCX3pelTmVHMEJzuh5 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: left;
   max-width: 150%;
-}`, "",{"version":3,"sources":["webpack://./src/components/LoginForm/LoginForm.module.scss"],"names":[],"mappings":"AAAA;EACI,eAAA;EACA,YAAA;AACJ;;AAEA;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;AACJ","sourcesContent":[".heading {\n    font-size: 2rem;\n    color: green;\n}\n\n.form {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    max-width: 150%;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/LoginForm/LoginForm.module.scss"],"names":[],"mappings":"AAAA;EACI,eAAA;EACA,cAAA;AACJ;;AAEA;EACI,aAAA;EACA,sBAAA;EACA,qBAAA;EACA,iBAAA;EACA,eAAA;AACJ","sourcesContent":[".heading {\n    font-size: 2rem;\n    color: #9000ff;\n}\n\n.form {\n    display: flex;\n    flex-direction: column;\n    justify-content: left;\n    align-items: left;\n    max-width: 150%;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"heading": `cp82M2vWPil8NvhvB7tS`,
@@ -836,7 +836,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.OovM8Bc3kyFDhHy_y24W {
   font-size: 2rem;
-  color: purple;
+  color: #9000ff;
 }
 
 .fFzangV2xm2t8P5WmvJN {
@@ -845,7 +845,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.OovM8Bc3kyFDhHy_y24W {
   justify-content: center;
   align-items: center;
   max-width: 150%;
-}`, "",{"version":3,"sources":["webpack://./src/components/SignUpForm/SignUpForm.module.scss"],"names":[],"mappings":"AAAA;EACI,eAAA;EACA,aAAA;AACJ;;AAEA;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;AACJ","sourcesContent":[".heading {\n    font-size: 2rem;\n    color: purple;\n}\n\n.form {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    max-width: 150%;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/SignUpForm/SignUpForm.module.scss"],"names":[],"mappings":"AAAA;EACI,eAAA;EACA,cAAA;AACJ;;AAEA;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;AACJ","sourcesContent":[".heading {\n    font-size: 2rem;\n    color: #9000ff;\n}\n\n.form {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    max-width: 150%;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"heading": `OovM8Bc3kyFDhHy_y24W`,
@@ -1227,4 +1227,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.69410477bc99e1f363e98ce4cdc7493c.js.map
+//# sourceMappingURL=App.8bb6a92004b4810938eefd36cced652e.js.map
