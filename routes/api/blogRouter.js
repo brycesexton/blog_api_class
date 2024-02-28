@@ -4,6 +4,7 @@ const blogCtrl = require('../../controllers/api/blogController')
 const userController = require('../../controllers/api/userController')
 
 // Index
+// 
 router.get('/', blogCtrl.index, blogCtrl.jsonBlogs)
 // Delete
 router.delete('/:id', userController.auth, blogCtrl.destroy, blogCtrl.jsonBlog)

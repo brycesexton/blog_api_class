@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import AuthPage from './pages/AuthPage/AuthPage'
 import HomePage from './pages/HomePage/HomePage'
